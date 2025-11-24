@@ -1,0 +1,22 @@
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/ratecore_bot
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
+COPY ratecore_bot/pyproject.toml /app/pyproject.toml
+RUN pip install --no-cache-dir poetry && \
+    poetry config virtualenvs.create false && \
+    poetry install --only main --no-interaction --no-root
+
+COPY ratecore_bot /app/ratecore_bot
+
+ENV BOT_TOKEN="" \
+    TELEGRAM_ADMIN_ID="" \
+    RCORE_API_BASE_URL="http://api:8080"
+
+CMD ["python", "-m", "ratecore_bot.main"]

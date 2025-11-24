@@ -1,0 +1,25 @@
+FROM golang:1.22-alpine AS builder
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY internal internal
+COPY pkg pkg
+COPY cmd cmd
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o ratecore-api ./cmd/ratecore-api
+
+FROM alpine:3.19
+WORKDIR /app
+
+COPY --from=builder /app/ratecore-api /app/ratecore-api
+
+EXPOSE 8080
+ENV RCORE_HTTP_PORT=8080
+
+CMD ["./ratecore-api"]

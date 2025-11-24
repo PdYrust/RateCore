@@ -1,0 +1,1 @@
+# RateCore Bot package

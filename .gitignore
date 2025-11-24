@@ -1,0 +1,71 @@
+# OS / editor noise
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env
+env
+venv/
+.venv/
+ratecore_bot/.env
+ratecore_bot/venv/
+ratecore_bot/.venv/
+
+# Poetry
+.poetry/
+# keep lock and pyproject tracked
+!poetry.lock
+!pyproject.toml
+
+# Go
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+# Go build/module caches
+pkg/mod/
+pkg/cache/
+GOCACHE
+GOMODCACHE
+.gopath/
+gopath/
+.gopath
+gopath
+
+# Runtime / data
+data/*.db
+*.db
+*.sqlite
+*.sqlite3
+logs/
+log/
+runtime/
+tmp/
+cache/
+nohup.out
+*.log
+
+# Node/npm
+node_modules/
+
+# Docker artifacts
+*.pid
+
+# Exclusions to keep tracked files
+!.env.example
+!Dockerfile*
+!docker-compose.yml
+!Makefile
+!**/*.md
+!scripts/**
